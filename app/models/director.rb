@@ -12,4 +12,14 @@
 #
 
 class Director < ApplicationRecord
+    def Director.youngest
+        return Director.all.order({ :dob => :desc}).first
+    end
+
+    def Director.eldest
+        return Director.where({ :dob => Director.minimum(:dob)}).first
+    end
+    def filmography
+        return Movie.where({ :director_id => self.id})
+    end
 end

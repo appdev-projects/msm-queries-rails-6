@@ -12,5 +12,10 @@
 #
 
 class Actor < ApplicationRecord
-
+    def characters
+        return Character.where({ :actor_id => self.id })
+    end
+    def filmography
+        film_ids = Character.where({ :actor_id => self.id }).pluck(:movie_id)
+        return Movie.where({ :id => film_ids })
 end
